@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 }
 
 class _MyHomePage extends StatefulWidget {
-  const _MyHomePage();
+  const _MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -134,11 +134,12 @@ class _MyHomePageState extends State<_MyHomePage> {
               series: <CartesianSeries<_PopulationData, String>>[
                 BarSeries<_PopulationData, String>(
                   dataSource: data,
-                  xValueMapper: (_PopulationData sales, _) => sales.x,
-                  yValueMapper: (_PopulationData sales, _) => sales.y1,
+                  xValueMapper: (_PopulationData population, int index) =>
+                      population.x,
+                  yValueMapper: (_PopulationData population, int index) =>
+                      population.y1,
                   name: 'Female',
                   color: Colors.pink,
-                  enableTooltip: true,
                   dataLabelSettings: const DataLabelSettings(
                     isVisible: true,
                     labelPosition: ChartDataLabelPosition.outside,
@@ -150,11 +151,12 @@ class _MyHomePageState extends State<_MyHomePage> {
                 ),
                 BarSeries<_PopulationData, String>(
                   dataSource: data,
-                  xValueMapper: (_PopulationData sales, _) => sales.x,
-                  yValueMapper: (_PopulationData sales, _) => sales.y2,
+                  xValueMapper: (_PopulationData population, int index) =>
+                      population.x,
+                  yValueMapper: (_PopulationData population, int index) =>
+                      population.y2,
                   name: 'Male',
                   color: Colors.blue,
-                  enableTooltip: true,
                   dataLabelSettings: const DataLabelSettings(
                     isVisible: true,
                     labelPosition: ChartDataLabelPosition.outside,
@@ -175,10 +177,10 @@ class _MyHomePageState extends State<_MyHomePage> {
 
 class _PopulationData {
   _PopulationData(this.x, this.y1, this.y2) {
-    y1 = -y1!;
+    y1 = -y1;
   }
 
   final String x;
-  double? y1;
-  double? y2;
+  double y1;
+  double y2;
 }
