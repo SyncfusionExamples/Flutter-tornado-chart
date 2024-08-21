@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   return runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
 }
 
 class _MyHomePage extends StatefulWidget {
-  const _MyHomePage({Key? key}) : super(key: key);
+  const _MyHomePage();
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -27,32 +28,33 @@ class _MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<_MyHomePage> {
   List<_PopulationData>? data;
+  final double _totalPopulation = 439719008;
 
   @override
   void initState() {
     super.initState();
     data = [
-      _PopulationData('0-4', 70.12, 69.12),
-      _PopulationData('5-9', 75.23, 74.23),
-      _PopulationData('10-14', 76.34, 74.44),
-      _PopulationData('15-19', 76.15, 76.11),
-      _PopulationData('20-24', 75.63, 77.22),
-      _PopulationData('25-29', 75.75, 75.45),
-      _PopulationData('30-34', 74.21, 75.67),
-      _PopulationData('35-39', 73.50, 73.78),
-      _PopulationData('40-44', 67.65, 70.12),
-      _PopulationData('45-49', 65.33, 70.32),
-      _PopulationData('50-54', 60.44, 63.54),
-      _PopulationData('55-59', 54.67, 55.63),
-      _PopulationData('60-64', 42.87, 43.71),
-      _PopulationData('65-69', 34.98, 33.87),
-      _PopulationData('70-74', 25.12, 25.66),
-      _PopulationData('75-79', 18.11, 19.22),
-      _PopulationData('80-84', 15.11, 14.22),
-      _PopulationData('85-89', 10.11, 9.22),
-      _PopulationData('90-94', 3.11, 3.22),
-      _PopulationData('95-99', 1.11, 1.22),
-      _PopulationData('100+', 0.3, 0.25),
+      _PopulationData('0-4', 15687321, 15039014),
+      _PopulationData('5-9', 16577877, 15890115),
+      _PopulationData('10-14', 16888377, 16197733),
+      _PopulationData('15-19', 17136711, 16484380),
+      _PopulationData('20-24', 17472667, 16960958),
+      _PopulationData('25-29', 17616377, 17303882),
+      _PopulationData('30-34', 17318629, 17186302),
+      _PopulationData('35-39', 16836127, 16902230),
+      _PopulationData('40-44', 15723691, 16027059),
+      _PopulationData('45-49', 13959888, 14450695),
+      _PopulationData('50-54', 12313479, 13002373),
+      _PopulationData('55-59', 11037894, 11955793),
+      _PopulationData('60-64', 9388603, 10557282),
+      _PopulationData('65-69', 7297733, 8619037),
+      _PopulationData('70-74', 5269323, 6634432),
+      _PopulationData('75-79', 3357561, 4560921),
+      _PopulationData('80-84', 1911079, 2936309),
+      _PopulationData('85-89', 781112, 1481688),
+      _PopulationData('90-94', 209008, 541978),
+      _PopulationData('95-99', 37879, 137868),
+      _PopulationData('100+', 4440, 23175),
     ];
   }
 
@@ -107,11 +109,14 @@ class _MyHomePageState extends State<_MyHomePage> {
                 ),
               ),
               primaryYAxis: NumericAxis(
+                minimum: -20000000,
+                maximum: 20000000,
                 majorGridLines: const MajorGridLines(
                   width: 0,
                 ),
                 axisLabelFormatter: (AxisLabelRenderDetails args) {
-                  String text = args.text.replaceAll('-', ' ');
+                  int value = ((args.value / _totalPopulation) * 100).round();
+                  String text = '${value.toString().replaceAll('-', ' ')}%';
                   return ChartAxisLabel(
                     text,
                     args.textStyle,
@@ -120,14 +125,20 @@ class _MyHomePageState extends State<_MyHomePage> {
               ),
               onDataLabelRender: (DataLabelRenderArgs dataLabelArgs) {
                 if (dataLabelArgs.text != null) {
-                  dataLabelArgs.text =
-                      '${dataLabelArgs.text!.replaceAll('-', ' ')}M';
+                  double population =
+                      ((dataLabelArgs.dataPoints[dataLabelArgs.pointIndex].y /
+                                  _totalPopulation) *
+                              100) /
+                          100;
+                  String percentageString =
+                      NumberFormat("##0.0%").format(population);
+                  dataLabelArgs.text = percentageString.replaceAll('-', ' ');
                 }
               },
               tooltipBehavior: TooltipBehavior(enable: true),
               onTooltipRender: (TooltipArgs tooltipArgs) {
                 if (tooltipArgs.text != null) {
-                  String text = '${tooltipArgs.text!.replaceAll(' -', ' ')}M';
+                  String text = tooltipArgs.text!.replaceAll(' -', ' ');
                   tooltipArgs.text = text;
                 }
               },
