@@ -2,8 +2,6 @@
 
 This repository contains a sample to create Tornado or Butterfly chart using [Syncfusion Flutter Chart](https://help.syncfusion.com/flutter/cartesian-charts/getting-started) widget.
 
-Please refer the Blog through this [link]().
-
 ## Syncfusion controls:
 
 This project used the following Syncfusion widget(s):
