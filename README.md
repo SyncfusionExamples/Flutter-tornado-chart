@@ -2,7 +2,7 @@
 
 This repository contains a sample to create Tornado or Butterfly chart using [Syncfusion Flutter Chart](https://help.syncfusion.com/flutter/cartesian-charts/getting-started) widget.
 
-Please refer the Blog through this [link]().
+Please refer the Blog through this [link](https://www.syncfusion.com/blogs/post/flutter-tornado-chart-for-world-population).
 
 ## Syncfusion widgets:
 
