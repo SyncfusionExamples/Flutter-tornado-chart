@@ -1,10 +1,10 @@
-# How to create Tornado or Butterfly chart using Flutter Charts
+# How to create Tornado or Butterfly chart using Syncfusion Flutter Charts
 
 This repository contains a sample to create Tornado or Butterfly chart using [Syncfusion Flutter Chart](https://help.syncfusion.com/flutter/cartesian-charts/getting-started) widget.
 
-Please refer the Blog through this [link]().
+Please refer the Blog through this [link](https://www.syncfusion.com/blogs/post/flutter-tornado-chart-for-world-population).
 
-## Syncfusion controls:
+## Syncfusion widgets:
 
 This project used the following Syncfusion widget(s):
 * [SfCartesianChart](https://www.syncfusion.com/flutter-widgets/flutter-charts)
